@@ -3,9 +3,18 @@ package com.borges.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+
+
+@Entity
 public class Categoria implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
+	@jakarta.persistence.Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	private Integer Id;
 	private String nome;
 
