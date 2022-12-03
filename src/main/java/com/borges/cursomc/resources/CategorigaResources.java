@@ -10,6 +10,6 @@ public class CategorigaResources {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listar() {
-		return "<h1>HJHJSa</h1>";
+		return "";
 	} 
 }
