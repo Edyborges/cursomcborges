@@ -6,21 +6,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.borges.cursomc.domain.Categoria;
-import com.borges.cursomc.services.CategoriaService;
+import com.borges.cursomc.domain.Cliente;
+import com.borges.cursomc.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/categoria")
-public class CategorigaResources {
-
+@RequestMapping(value = "/cliente")
+public class ClienteResources {
+	
 	@Autowired
-	private CategoriaService service;
-
+	private ClienteService service;
+	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-
-		Categoria objeto = service.buscar(id);
-
+	public ResponseEntity<?> find(@PathVariable Integer id){
+		
+	Cliente objeto	= service.buscar(id);
+		
 		return ResponseEntity.ok().body(objeto);
 	}
+
 }
