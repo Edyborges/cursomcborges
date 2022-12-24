@@ -3,6 +3,9 @@ package com.borges.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.borges.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -10,9 +13,6 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
-
-import com.borges.cursomc.domain.enums.EstadoPagamento;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -23,7 +23,7 @@ public abstract class Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
