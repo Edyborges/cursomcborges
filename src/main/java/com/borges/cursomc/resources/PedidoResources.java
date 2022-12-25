@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.borges.cursomc.domain.Pedido;
 import com.borges.cursomc.services.PedidoService;
 
@@ -17,9 +18,9 @@ public class PedidoResources {
 	private PedidoService service;
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
 
-		Pedido objeto = service.buscar(id);
+		Pedido objeto = service.find(id);
 
 		return ResponseEntity.ok().body(objeto);
 	}
