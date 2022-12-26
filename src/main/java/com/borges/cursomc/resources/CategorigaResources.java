@@ -1,5 +1,7 @@
 package com.borges.cursomc.resources;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.borges.cursomc.domain.Categoria;
+import com.borges.cursomc.dto.CategoriaDto;
 import com.borges.cursomc.services.CategoriaService;
 
 @RestController
@@ -46,5 +49,12 @@ public class CategorigaResources {
 	public ResponseEntity<Void> delete (@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDto>> findAll() {
+		List<Categoria> list = service.findAll();
+		List<CategoriaDto> listDto = list.stream().map(obj -> new CategoriaDto(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 }
