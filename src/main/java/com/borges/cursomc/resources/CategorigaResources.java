@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -28,22 +30,24 @@ public class CategorigaResources {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
-		Categoria objeto = service.find(id);
-		return ResponseEntity.ok().body(objeto);
+		Categoria object = service.find(id);
+		return ResponseEntity.ok().body(object);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria objeto) {
-		objeto = service.insert(objeto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objeto.getId()).toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDto objectDto) {
+		Categoria object = service.fromDto(objectDto);
+		object = service.insert(object);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(object.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria objeto, @PathVariable Integer id) {
-
-		objeto.setId(id);
-		objeto = service.update(objeto);
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDto objectDto, @PathVariable Integer id) {
+		
+		Categoria object = service.fromDto(objectDto);
+		object.setId(id);
+		object = service.update(object);
 		return ResponseEntity.noContent().build();
 	}
 
