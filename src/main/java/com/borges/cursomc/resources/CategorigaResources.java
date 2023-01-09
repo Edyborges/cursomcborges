@@ -22,7 +22,7 @@ import com.borges.cursomc.dto.CategoriaDto;
 import com.borges.cursomc.services.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categoria")
+@RequestMapping(value = "/categorias")
 public class CategorigaResources {
 
 	@Autowired

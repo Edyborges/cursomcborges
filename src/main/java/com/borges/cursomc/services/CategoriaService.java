@@ -24,20 +24,21 @@ public class CategoriaService {
 
 	public Categoria find(Integer id) {
 
-		Optional<Categoria> objeto = repository.findById(id);
+		Optional<Categoria> object = repository.findById(id);
 
-		return objeto.orElseThrow(() -> new ObjectNotFoundException(
+		return object.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado ! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
-	public Categoria insert(Categoria objeto) {
-		objeto.setId(null);
-		return repository.save(objeto);
+	public Categoria insert(Categoria object) {
+		object.setId(null);
+		return repository.save(object);
 	}
 
-	public Categoria update(Categoria objeto) {
-		find(objeto.getId());
-		return repository.save(objeto);
+	public Categoria update(Categoria object) {
+		Categoria newObject = find(object.getId());
+		updateData(newObject, object);
+		return repository.save(newObject);
 	}
 
 	public void delete(Integer id) {
@@ -61,5 +62,10 @@ public class CategoriaService {
 	
 	public Categoria fromDto(CategoriaDto ObjectDto) {
 		return new Categoria(ObjectDto.getId(), ObjectDto.getNome());
+	}
+	
+	private void updateData(Categoria newObject, Categoria object) {
+		newObject.setNome(object.getNome());
+		
 	}
 }

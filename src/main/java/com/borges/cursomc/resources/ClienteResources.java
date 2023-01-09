@@ -19,7 +19,7 @@ import com.borges.cursomc.services.ClienteService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/cliente")
+@RequestMapping(value = "/clientes")
 public class ClienteResources {
 	
 	@Autowired
