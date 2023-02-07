@@ -2,8 +2,9 @@ package com.borges.cursomc.dto;
 
 import java.io.Serializable;
 
-import com.borges.cursomc.domain.Cidade;
+import com.borges.cursomc.services.validation.ClienteInsert;
 
+@ClienteInsert
 public class ClienteNewDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

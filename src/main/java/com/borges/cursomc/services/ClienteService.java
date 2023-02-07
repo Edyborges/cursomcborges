@@ -18,7 +18,6 @@ import com.borges.cursomc.dto.ClienteDto;
 import com.borges.cursomc.dto.ClienteNewDto;
 import com.borges.cursomc.repositories.CidadeRepository;
 import com.borges.cursomc.repositories.ClienteRepository;
-import com.borges.cursomc.repositories.EnderecoRepository;
 import com.borges.cursomc.services.exceptions.DataIntegrityException;
 import com.borges.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -31,10 +30,7 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repository;
-	
-	@Autowired
-	private EnderecoRepository enderecoRepository;
-
+		
 	@Autowired
 	private CidadeRepository cidadeRepository;
 	
@@ -84,6 +80,7 @@ public class ClienteService {
 		return new Cliente(ObjectDto.getId(), ObjectDto.getNome(), ObjectDto.getEmail(), null, null);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Cliente fromDto(ClienteNewDto ObjectDto) {
 		Cliente cli = new Cliente(null, ObjectDto.getNome(), ObjectDto.getEmail(), ObjectDto.getCpfOuCnpj(), TipoCliente.toEnum(ObjectDto.getTipo()));
 		Cidade cid = cidadeRepository.getOne(ObjectDto.getCidadeId());
